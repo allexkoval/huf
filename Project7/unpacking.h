@@ -32,7 +32,7 @@ void Unzip::unzipping(std::string fl) {
 		tokens.push_back(tok);
 		tok = strtok(NULL, "||");
 	}
-	char byte[1];
+	
 
 	std::string name = tokens[0].c_str();
 	std::string vocab = tokens[1].c_str();

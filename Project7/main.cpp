@@ -1,4 +1,5 @@
 #include "packing.h"
+#include "unpacking.h"
 
 
 
@@ -6,7 +7,10 @@
 int main(int argc, char* argv[]) {
 	Zip *zip = new Zip("C:\\test\\3.txt", "C:\\test");
 	zip->zipping();
-	std::cout << "Done" << std::endl;
+	std::cout << "Zipping Done" << std::endl;
+	Unzip *unz = new Unzip("C:\\test\\unpack");
+	unz->unzipping("C:\\test\\zipped.zipp");
+	std::cout << "Unzipping Done" << std::endl;
 	system("Pause");
 
 	
