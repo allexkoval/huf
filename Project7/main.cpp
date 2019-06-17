@@ -5,16 +5,17 @@
 
 
 int main(int argc, char* argv[]) {
-	Zip *zip = new Zip("C:\\test\\3.txt", "C:\\test");
+	Zip *zip = new Zip("C:\\test\\2.txt", "C:\\test");
 	zip->zipping();
 	std::cout << "Zipping Done" << std::endl;
+	//std::cout << "Starting..." << std::endl;
 	Unzip *unz = new Unzip("C:\\test\\unpack");
 	unz->unzipping("C:\\test\\zipped.zipp");
 	std::cout << "Unzipping Done" << std::endl;
 	system("Pause");
 
-	
-	
+
+
 	/*
 	ifstream unpack("C:\\test\\output.zipp", ios::out | ios::binary);
 	ofstream output("C:\\test\\unzipped.txt", ios::out | ios::binary);

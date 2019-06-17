@@ -12,14 +12,14 @@ private:
 
 
 public:
-	Info(std::string packedFile,std::string filePath) {
+	Info(std::string packedFile, std::string filePath) {
 		filen = packedFile;
 		packPath = filePath;
 
 	}
 	void getInfo(std::string treeSize);
-std::string getFileName(std::string s) {
-	return s.substr(s.find_last_of("\\") + 1, s.size());
+	std::string getFileName(std::string s) {
+		return s.substr(s.find_last_of("\\") + 1, s.size());
 	}
 };
 
@@ -54,7 +54,7 @@ void Info::getInfo(std::string treeSize) {
 		}
 		//int s = digs(res);
 		inf << res;
-		
+
 	}
 	inf << "||";
 	inf << s_info;

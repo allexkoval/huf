@@ -2,7 +2,8 @@
 #include "Node.h"
 #include <fstream>
 #include <vector>
-//#include <iostream>
+#include <string>
+#include <iostream>
 
 class Unzip {
 private:
@@ -26,34 +27,34 @@ void Unzip::unzipping(std::string fl) {
 	inp.read(infoBlock, size);
 	std::vector<std::string> tokens;
 	char *tok = strtok(infoBlock, "||");
-	
+
 	while (tok) {
 		if (strlen(tok) == 0) break;
 		tokens.push_back(tok);
 		tok = strtok(NULL, "||");
 	}
-	
 
-	std::string name = tokens[0].c_str();
-	std::string vocab = tokens[1].c_str();
-	std::string treeStr = tokens[1].c_str();
+
+	std::string name = tokens[0];
+	vocab = tokens[1];
+	treeStr = tokens[2];
 
 	std::string fullPath = path + name;
 	Node *root = new Node();
 
 	BuildTree(root);
 
-	std::ifstream unpack(fl, std::ios::out | std::ios::binary);
+	//std::ifstream unpack(fl, std::ios::out | std::ios::binary);
 	std::ofstream unzip(fullPath, std::ios::out | std::ios::binary);
-
+	//unpack.seekg();
 	//TODO unzipping
 
 	//ifstream unpack("C:\\test\\output.zipp", ios::out | ios::binary);
 	//ofstream output("C:\\test\\unzipped.txt", ios::out | ios::binary);
 	Node *p = root;
 	int count = 0;
-	char byte = unpack.get();
-	while (!unpack.eof()) {
+	char byte = inp.get();
+	while (!inp.eof()) {
 		bool b = byte & (1 << (7 - count));
 		if (b) p = p->right; else p = p->left;
 		if (p->left == NULL && p->right == NULL) {
@@ -63,11 +64,11 @@ void Unzip::unzipping(std::string fl) {
 		count++;
 		if (count == 8) {
 			count = 0;
-			byte = unpack.get();
+			byte = inp.get();
 		}
 	}
 	//std::cout << std::endl;
-	unpack.close();
+	inp.close();
 	unzip.close();
 
 	unzip.close();

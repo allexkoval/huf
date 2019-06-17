@@ -42,7 +42,7 @@ void Zip::zipping() {
 	std::ifstream inpFile(filename.c_str(), std::ios::out | std::ios::binary);
 	std::map<char, int> m;
 	char b;
-	while (inpFile.get(b))
+	while (b = inpFile.get())
 	{
 		m[b]++;
 	}
@@ -69,22 +69,24 @@ void Zip::zipping() {
 	Node *root = t.front();		//tree root												
 	BuildTable(root);
 	treeTable(root);
-	//writeTree = vocab + "||" + writeTree;
+	writeTree = vocab + "||" + writeTree;
 	inpFile.clear();
 	inpFile.seekg(0);
 
 	std::ofstream out(zippedFile.c_str(), std::ios::out | std::ios::binary);
+	
 	Info * inf = new Info(filename, path);
 	inf->getInfo(writeTree);
-	std::ifstream info((path + "info.txt").c_str() ,std::ios::out | std::ios::binary);
+	
+	std::ifstream info((path + "info.txt").c_str(), std::ios::out | std::ios::binary);
 	char c;
-	while (info.get(c)) {
+	while (c = info.get()) {
 		out << c;
 	}
 	int count = 0;
 	char buf = 0;
-	
-	while (inpFile.get(c)) {
+
+	while (c = inpFile.get()) {
 		std::vector<bool> x = table[c];
 		for (int n = 0; n < x.size(); n++)
 		{
@@ -111,10 +113,10 @@ void Zip::treeTable(Node *root) {
 		writeTree.append("U");
 		treeTable(root->right);
 	}
-	if (root->left == NULL || root->right == NULL) {
+	/*if (root->left == NULL || root->right == NULL) {
 		writeTree += root->c;
-	}
-	
+	}*/
+
 };
 
 void Zip::BuildTable(Node *root) {
@@ -126,9 +128,9 @@ void Zip::BuildTable(Node *root) {
 		code.push_back(1);
 		BuildTable(root->right);
 	}
-	if (root->left == NULL && root->right == NULL) { 
+	if (root->left == NULL && root->right == NULL) {
 		table[root->c] = code;
-		vocab+=root->c;
+		vocab += root->c;
 	}
 	if (!code.empty())
 		code.pop_back();
