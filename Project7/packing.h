@@ -41,10 +41,11 @@ public:
 void Zip::zipping() {
 	std::ifstream inpFile(filename.c_str(), std::ios::out | std::ios::binary);
 	std::map<char, int> m;
-	char b;
-	while (b = inpFile.get())
+	char b = inpFile.get();
+	while (!inpFile.eof())
 	{
 		m[b]++;
+		b = inpFile.get();
 	}
 	std::map<char, int>::iterator i;
 	for (i = m.begin(); i != m.end(); ++i)
@@ -79,14 +80,16 @@ void Zip::zipping() {
 	inf->getInfo(writeTree);
 	
 	std::ifstream info((path + "info.txt").c_str(), std::ios::out | std::ios::binary);
-	char c;
-	while (c = info.get()) {
+	char c = info.get();
+	while (!info.eof()) {
 		out << c;
+		c = info.get();
 	}
 	int count = 0;
 	char buf = 0;
 
-	while (c = inpFile.get()) {
+	while (!inpFile.eof()) {
+		c = inpFile.get();
 		std::vector<bool> x = table[c];
 		for (int n = 0; n < x.size(); n++)
 		{

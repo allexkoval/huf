@@ -5,7 +5,7 @@
 
 
 int main(int argc, char* argv[]) {
-	Zip *zip = new Zip("C:\\test\\2.txt", "C:\\test");
+	Zip *zip = new Zip("C:\\test\\act.png", "C:\\test");
 	zip->zipping();
 	std::cout << "Zipping Done" << std::endl;
 	//std::cout << "Starting..." << std::endl;
