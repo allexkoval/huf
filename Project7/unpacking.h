@@ -16,6 +16,7 @@ public:
 	}
 	void unzipping(std::string fl);
 	void BuildTree(Node *p);
+	void Unzip::print_Tree(Node * p, int level);
 };
 
 void Unzip::unzipping(std::string fl) {
@@ -90,5 +91,16 @@ void Unzip::BuildTree(Node *p) {
 			p->right = new Node();
 			BuildTree(p->right);
 		}
+	}
+}
+
+void Unzip::print_Tree(Node * p, int level)
+{
+	if (p)
+	{
+		print_Tree(p->left, level + 1);
+		for (int i = 0; i < level; i++) std::cout << "   ";
+		std::cout << "Nd" << std::endl;
+		print_Tree(p->right, level + 1);
 	}
 }

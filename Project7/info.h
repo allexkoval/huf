@@ -10,12 +10,10 @@ private:
 	std::string packPath;
 	std::string tree;
 
-
 public:
 	Info(std::string packedFile, std::string filePath) {
 		filen = packedFile;
 		packPath = filePath;
-
 	}
 	void getInfo(std::string treeSize);
 	std::string getFileName(std::string s) {
@@ -54,11 +52,10 @@ void Info::getInfo(std::string treeSize) {
 		}
 		//int s = digs(res);
 		inf << res;
-
 	}
 	inf << "||";
 	inf << s_info;
-	inf << treeSize;
+	inf.write(treeSize.data(), am - 2);
 	inf << "||";
 	inf.close();
 }

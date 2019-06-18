@@ -25,9 +25,7 @@ public:
 		zippedFile = path + "zipped.zipp";
 	}
 
-	/*static std::list<Node*> getNode() {
-		return t;
-	}*/
+
 	struct MyCompare {
 		bool operator()(Node *l, Node *r) const {
 			return l->a < r->a;
@@ -82,7 +80,7 @@ void Zip::zipping() {
 	std::ifstream info((path + "info.txt").c_str(), std::ios::out | std::ios::binary);
 	char c = info.get();
 	while (!info.eof()) {
-		out << c;
+		out.put(c);// << c;
 		c = info.get();
 	}
 	int count = 0;
@@ -97,7 +95,7 @@ void Zip::zipping() {
 			count++;
 			if (count == 8) {
 				count = 0;
-				out << buf;
+				out.put(buf);// << buf;
 				buf = 0;
 			}
 		}
@@ -116,10 +114,6 @@ void Zip::treeTable(Node *root) {
 		writeTree.append("U");
 		treeTable(root->right);
 	}
-	/*if (root->left == NULL || root->right == NULL) {
-		writeTree += root->c;
-	}*/
-
 };
 
 void Zip::BuildTable(Node *root) {
