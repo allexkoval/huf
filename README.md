@@ -1,1 +1,1 @@
-# huf
+# Huffman encoding
